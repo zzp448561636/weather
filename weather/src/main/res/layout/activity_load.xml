@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/load"/>
+        android:src="@mipmap/load"/>
     <com.example.zeng.weather.widget.RoundProgressBar
         android:id="@+id/rpb"
         android:layout_width="60dp"

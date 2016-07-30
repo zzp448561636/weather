@@ -8,5 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+   <style name="RadioButtonStyle" >
+       <item name="android:button">@drawable/radio_selector</item>
+       <item name="android:paddingBottom">10dp</item>
+       <item name="android:paddingTop">10dp</item>
+    </style>
+
 
 </resources>
