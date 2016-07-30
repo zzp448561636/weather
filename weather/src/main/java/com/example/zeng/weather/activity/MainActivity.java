@@ -57,12 +57,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         FragmentTransaction tran = fragmentManager.beginTransaction();
         switch (radioGroup.getCheckedRadioButtonId()){
             case R.id.radio_weather:
-                if(weatherFragment == null)   {
-                    weatherFragment = new WeatherFragment();
-                }
-                if(!weatherFragment.isAdded()) {
-                    tran.add(R.id.frame_layout,weatherFragment,WEATHER_TAG);
-                }
+                if(weatherFragment == null) weatherFragment = new WeatherFragment();
+                if(!weatherFragment.isAdded())tran.add(R.id.frame_layout,weatherFragment,WEATHER_TAG);
                 else tran.show(weatherFragment);
                 if(sceneFragment !=null && sceneFragment.isAdded() && !sceneFragment.isHidden())tran.hide(sceneFragment);
                 if(userFragment !=null && userFragment.isAdded() && !userFragment.isHidden())tran.hide(userFragment);
