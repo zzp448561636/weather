@@ -20,9 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"
-            android:launchMode="singleInstance"
-            ></activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleInstance" />
+        <activity android:name=".activity.OrientationActivity"></activity>
     </application>
 
 </manifest>

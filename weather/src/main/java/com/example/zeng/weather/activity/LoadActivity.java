@@ -11,14 +11,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.zeng.weather.AppController;
 import com.example.zeng.weather.R;
+import com.example.zeng.weather.data.CityInfo;
 import com.example.zeng.weather.data.Constant;
 import com.example.zeng.weather.data.OnAnimationListener;
+import com.example.zeng.weather.database.DBOperation;
 import com.example.zeng.weather.widget.RoundProgressBar;
+
+import java.util.List;
 
 public class LoadActivity extends AppCompatActivity implements OnAnimationListener {
     private ImageView iv;
     private int animationTime = 3000;
     private RoundProgressBar rpb;
+    private List<CityInfo> cityInfoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +39,22 @@ public class LoadActivity extends AppCompatActivity implements OnAnimationListen
             }
         });
 
-         //设想中应该先get方法获取广告图片下载url，再进行下载
+        //先显示一下首界面，不然跳的太快了
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                showAdv();
+                DBOperation dbOperation = new DBOperation(LoadActivity.this);
+                cityInfoList = dbOperation.queryCitySelected();
+                //数据库中无存储的城市信息，则先进行定位
+                if (cityInfoList == null)goToOrientationActivity();
+                else showAdv();
             }
-        },2000);
+        },1000);
     }
 
+    /**
+     * 设想中应该先get方法获取广告图片下载url，再进行下载
+     */
     private void showAdv(){
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();
         imageLoader.get(Constant.ADV_IMAGE_URL, new ImageLoader.ImageListener() {
@@ -66,6 +78,13 @@ public class LoadActivity extends AppCompatActivity implements OnAnimationListen
 
     public void goToMainActivity(){
         Intent intent = new Intent(LoadActivity.this,MainActivity.class);
+        startActivity(intent);
+        LoadActivity.this.finish();
+    }
+
+    public void goToOrientationActivity(){
+        Intent intent = new Intent(LoadActivity.this,OrientationActivity.class);
+        intent.putExtra("isOrientation",true);
         startActivity(intent);
         LoadActivity.this.finish();
     }
