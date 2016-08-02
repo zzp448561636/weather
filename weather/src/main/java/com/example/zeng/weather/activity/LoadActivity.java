@@ -14,7 +14,6 @@ import com.example.zeng.weather.R;
 import com.example.zeng.weather.data.CityInfo;
 import com.example.zeng.weather.data.Constant;
 import com.example.zeng.weather.data.OnAnimationListener;
-import com.example.zeng.weather.database.DBOperation;
 import com.example.zeng.weather.widget.RoundProgressBar;
 
 import java.util.List;
@@ -43,8 +42,7 @@ public class LoadActivity extends AppCompatActivity implements OnAnimationListen
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                DBOperation dbOperation = new DBOperation(LoadActivity.this);
-                cityInfoList = dbOperation.queryCitySelected();
+                cityInfoList = AppController.getInstance().getCityInfoList();
                 //数据库中无存储的城市信息，则先进行定位
                 if (cityInfoList == null)goToOrientationActivity();
                 else showAdv();
@@ -84,6 +82,7 @@ public class LoadActivity extends AppCompatActivity implements OnAnimationListen
 
     public void goToOrientationActivity(){
         Intent intent = new Intent(LoadActivity.this,OrientationActivity.class);
+        //是否自动进行定位并添加位置
         intent.putExtra("isOrientation",true);
         startActivity(intent);
         LoadActivity.this.finish();

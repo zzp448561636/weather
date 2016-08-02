@@ -7,7 +7,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.example.zeng.weather.data.CityInfo;
+import com.example.zeng.weather.database.DBOperation;
 import com.example.zeng.weather.util.LruBitmapCache;
+
+import java.util.List;
 
 /**
  * Created by Zeng on 2016/7/24.
@@ -16,6 +20,8 @@ public class AppController extends Application{
     public static final String TAG = AppController.class.getSimpleName();
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    private List<CityInfo> cityInfoList;
+    private DBOperation dbOperation;
 
     private static AppController mInstance;
 
@@ -59,6 +65,13 @@ public class AppController extends Application{
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    public List<CityInfo> getCityInfoList(){
+        if(cityInfoList != null) return cityInfoList;
+        if(dbOperation == null) dbOperation = new DBOperation(AppController.this);
+        cityInfoList = dbOperation.queryCitySelected();
+        return cityInfoList;
     }
 
 }

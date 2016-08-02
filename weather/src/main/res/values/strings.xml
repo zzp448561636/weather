@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Weather</string>
     <string name="skip">跳过</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="orientation_main">世界，一个触碰的距离</string>
+    <string name="hint_search_orientation">输入城市</string>
+    <string name="orien_search">搜索</string>
 </resources>
