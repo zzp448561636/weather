@@ -74,33 +74,41 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hot_city"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"/>
+            <GridView
+                android:id="@+id/hot_city_grid"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:text="1"/>
+                android:layout_height="280dp"
+                android:numColumns="3"
+                android:columnWidth="90dp"
+                android:stretchMode="spacingWidthUniform"
+                android:verticalSpacing="20dp"
+                android:layout_marginTop="10dp"
+                />
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hot_scene"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"/>
+            <GridView
+                android:id="@+id/hot_scene_grid"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:text="2"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:text="3"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:text="4"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:text="5"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:text="6"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:text="7"/>
+                android:layout_height="280dp"
+                android:numColumns="3"
+                android:columnWidth="90dp"
+                android:stretchMode="spacingWidthUniform"
+                android:verticalSpacing="20dp"
+                android:layout_marginTop="10dp"
+                />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

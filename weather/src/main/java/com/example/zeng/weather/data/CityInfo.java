@@ -34,6 +34,18 @@ public class CityInfo implements Parcelable {
         parcel.writeInt(cityOrder);
     }
 
+    public int getCityId() {
+        return cityId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public int getCityOrder() {
+        return cityOrder;
+    }
+
     public static final Parcelable.Creator<CityInfo> CREATOR = new Parcelable.Creator<CityInfo>() {
         @Override
         public CityInfo createFromParcel(Parcel parcel) {

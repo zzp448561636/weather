@@ -4,4 +4,6 @@
     <string name="orientation_main">世界，一个触碰的距离</string>
     <string name="hint_search_orientation">输入城市</string>
     <string name="orien_search">搜索</string>
+    <string name="hot_city">热门城市</string>
+    <string name="hot_scene">热门景点</string>
 </resources>

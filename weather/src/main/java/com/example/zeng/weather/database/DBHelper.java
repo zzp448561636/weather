@@ -20,9 +20,9 @@ public class DBHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table if not exists " + Constant.TBL_CITY_SELECTED
                 +"("
-                + Constant.TBL_CITY_SELECTED_ID + " integer primary key autoincrement, "
-                + Constant.TBL_CITY_SELECTED_NAME + " varchar(20), "
-                + Constant.TBL_CITY_SELECTED_ORDER + " integer)");
+                + Constant.COL_CITY_SELECTED_ID + " integer primary key autoincrement, "
+                + Constant.COL_CITY_SELECTED_NAME + " varchar(20), "
+                + Constant.COL_CITY_SELECTED_ORDER + " integer)");
     }
 
     @Override

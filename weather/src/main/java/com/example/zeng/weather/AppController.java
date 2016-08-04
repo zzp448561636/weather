@@ -11,6 +11,7 @@ import com.example.zeng.weather.data.CityInfo;
 import com.example.zeng.weather.database.DBOperation;
 import com.example.zeng.weather.util.LruBitmapCache;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class AppController extends Application{
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private List<CityInfo> cityInfoList;
-    private DBOperation dbOperation;
+    private boolean isCityListChanged;
 
     private static AppController mInstance;
 
@@ -29,6 +30,7 @@ public class AppController extends Application{
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        isCityListChanged = false;
     }
 
     public static synchronized AppController getInstance() {
@@ -69,9 +71,42 @@ public class AppController extends Application{
 
     public List<CityInfo> getCityInfoList(){
         if(cityInfoList != null) return cityInfoList;
-        if(dbOperation == null) dbOperation = new DBOperation(AppController.this);
+        DBOperation dbOperation = new DBOperation(AppController.this);
         cityInfoList = dbOperation.queryCitySelected();
+        dbOperation.closeRes();
+        dbOperation = null;
         return cityInfoList;
     }
 
+    public void appendCityInfoList(CityInfo cityInfo){
+        if (cityInfoList == null) cityInfoList = new ArrayList<>();
+        cityInfoList.add(cityInfo);
+    }
+
+    public List<String> getCityNameList(){
+        List<String> list = null;
+        DBOperation dbOperation = new DBOperation(AppController.this);
+        list = dbOperation.queryCitySelectedName();
+        dbOperation.closeRes();
+        dbOperation = null;
+        return list;
+    }
+
+    public boolean isCityListChanged() {
+        return isCityListChanged;
+    }
+
+    public void setCityListChanged(boolean cityListChanged) {
+        isCityListChanged = cityListChanged;
+    }
+
+    /**
+     * 返回当前cityInfoList中order的最大值
+     * 因为每次删除移动都会修改order，
+     * 所以数据库中cityorder是连续不重复的，从1到size
+     * @return
+     */
+    public int getLatestOrder(){
+        return cityInfoList.size();
+    }
 }

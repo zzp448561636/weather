@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -25,9 +23,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private final String SCENE_TAG = "scene";
     private final String USER_TAG = "user";
     private UserFragment userFragment;
-
-    private GestureDetector gestureDetector;
-    private GestureDetector.SimpleOnGestureListener gestureListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +77,10 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         tran.commit();
     }
 
-    private void initGesture(){
-        gestureListener = new GestureDetector.SimpleOnGestureListener(){
-            @Override
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-               return super.onScroll(e1, e2, distanceX, distanceY);
-            }
-        };
-        gestureDetector = new GestureDetector(this,gestureListener);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //TODO:判断isdataChanged,数据的显示在此处进行
     }
 
     public void onFragmentInteraction(Uri uri){

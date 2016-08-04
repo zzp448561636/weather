@@ -6,4 +6,5 @@
     <color name="orange">#FFA500</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="holo_blue_dark">#ff0099cc</color>
 </resources>
