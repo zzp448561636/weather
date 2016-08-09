@@ -10,3 +10,5 @@
 3、本地数据库读写的基础操作
 4、本地文件读写的基础操作
 5、运用coordinatorLayout等新控件实现页面顶部图像内容的折叠
+6、百度定位SDK进行定位
+7、android6.0之后，某些权限例如定位需要用户同意，不再像之前只要manifest中申请，所以增加了权限申请，使用github上开源项目easypermission

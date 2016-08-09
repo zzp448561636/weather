@@ -109,6 +109,9 @@
                 android:verticalSpacing="20dp"
                 android:layout_marginTop="10dp"
                 />
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

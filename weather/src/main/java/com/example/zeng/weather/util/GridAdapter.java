@@ -1,4 +1,4 @@
-package com.example.zeng.weather.data;
+package com.example.zeng.weather.util;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.zeng.weather.AppController;
 import com.example.zeng.weather.R;
 
 import java.util.List;
@@ -22,11 +21,11 @@ public class GridAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<String> cityList;
 
-    public GridAdapter(Context context,List<String> list){
+    public GridAdapter(Context context,List<String> list,List<String> cityList){
         this.list = list;
         this.context = context;
         this.inflater = LayoutInflater.from(context);
-        this.cityList = AppController.getInstance().getCityNameList();
+        this.cityList = cityList;
     }
 
     @Override

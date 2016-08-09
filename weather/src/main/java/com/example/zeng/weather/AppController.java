@@ -23,6 +23,7 @@ public class AppController extends Application{
     private ImageLoader mImageLoader;
     private List<CityInfo> cityInfoList;
     private boolean isCityListChanged;
+    private int curCityIndex;
 
     private static AppController mInstance;
 
@@ -31,6 +32,7 @@ public class AppController extends Application{
         super.onCreate();
         mInstance = this;
         isCityListChanged = false;
+        curCityIndex = 1;
     }
 
     public static synchronized AppController getInstance() {
@@ -98,6 +100,14 @@ public class AppController extends Application{
 
     public void setCityListChanged(boolean cityListChanged) {
         isCityListChanged = cityListChanged;
+    }
+
+    public int getCurCityIndex() {
+        return curCityIndex;
+    }
+
+    public void setCurCityIndex(int curCityIndex) {
+        this.curCityIndex = curCityIndex;
     }
 
     /**

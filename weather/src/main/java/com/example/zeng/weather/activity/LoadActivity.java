@@ -2,6 +2,7 @@ package com.example.zeng.weather.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -41,23 +42,19 @@ public class LoadActivity extends AppCompatActivity implements OnAnimationListen
             }
         });
 
-        AppController.getInstance().getCityInfoList();
-        writeToFile();
-        goToOrientationActivity();
-
         //先显示一下首界面，不然跳的太快了
-        //此处其实也可以做一些版本对比，下载一些相关数据
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                //数据库中无存储的城市信息，则先进行定位
-//                if (AppController.getInstance().getCityInfoList().size() == 0){
-//                    writeToFile();
-//                    goToOrientationActivity();
-//                }
-//                else showAdv();
-//            }
-//        },1000);
+//        此处其实也可以做一些版本对比，下载一些相关数据，例如writeToFile模拟的下载热门城市信息的文件
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //数据库中无存储的城市信息，则先进行定位
+                if (AppController.getInstance().getCityInfoList().size() == 0){
+                    writeToFile();
+                    goToOrientationActivity();
+                }
+                else showAdv();
+            }
+        },1000);
     }
 
     /**

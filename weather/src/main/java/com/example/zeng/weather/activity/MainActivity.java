@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     @Override
     protected void onResume() {
         super.onResume();
-        //TODO:判断isdataChanged,数据的显示在此处进行
+        //TODO:判断isdataChanged,数据的显示在此处进行,以及当前所选中的城市
     }
 
     public void onFragmentInteraction(Uri uri){
