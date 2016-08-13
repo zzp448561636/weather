@@ -32,7 +32,7 @@ public class AppController extends Application{
         super.onCreate();
         mInstance = this;
         isCityListChanged = false;
-        curCityIndex = 1;
+        curCityIndex = 0;
     }
 
     public static synchronized AppController getInstance() {
@@ -80,9 +80,30 @@ public class AppController extends Application{
         return cityInfoList;
     }
 
-    public void appendCityInfoList(CityInfo cityInfo){
-        if (cityInfoList == null) cityInfoList = new ArrayList<>();
-        cityInfoList.add(cityInfo);
+    /**
+     *
+     * @param name
+     * @return -1失败，1成功
+     */
+    public int addCityInfoList(String name){
+        DBOperation db  = new DBOperation(AppController.this);
+        int order = getLatestOrder() + 1;
+        CityInfo cf = null;
+        cf = db.insertCitySelected(name,order);
+        if (cf == null){
+            db.closeRes();
+            db = null;
+            return -1;
+        }
+        else{
+            if (cityInfoList == null) cityInfoList = new ArrayList<>();
+            cityInfoList.add(cf);
+            isCityListChanged = true;
+            curCityIndex = order - 1;
+            db.closeRes();
+            db = null;
+            return 1;
+        }
     }
 
     public List<String> getCityNameList(){
@@ -118,5 +139,27 @@ public class AppController extends Application{
      */
     public int getLatestOrder(){
         return cityInfoList.size();
+    }
+
+    public List<CityInfo> delete(int position){
+        DBOperation db  = new DBOperation(AppController.this);
+        db.delete(cityInfoList.get(position));
+        cityInfoList.clear();
+        cityInfoList.addAll(db.queryCitySelected());
+        db.closeRes();
+        db = null;
+        return  cityInfoList;
+    }
+
+    public List<CityInfo> swap(int from,int to){
+        CityInfo cf = cityInfoList.get(from);
+        CityInfo ct = cityInfoList.get(to);
+        DBOperation db  = new DBOperation(AppController.this);
+        db.swap(cf,ct);
+        cityInfoList.clear();
+        cityInfoList.addAll(db.queryCitySelected());
+        db.closeRes();
+        db=null;
+        return cityInfoList;
     }
 }

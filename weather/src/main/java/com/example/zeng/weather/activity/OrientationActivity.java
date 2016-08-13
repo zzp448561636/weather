@@ -14,15 +14,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.example.zeng.weather.AppController;
 import com.example.zeng.weather.R;
-import com.example.zeng.weather.data.CityInfo;
 import com.example.zeng.weather.data.Constant;
-import com.example.zeng.weather.database.DBOperation;
 import com.example.zeng.weather.util.GridAdapter;
 import com.example.zeng.weather.util.LocationService;
 
@@ -39,6 +38,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class OrientationActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
     private boolean isOrientation;
     private Button btnSearch;
+    private ImageButton btnBack;
     private CoordinatorLayout coordinatorLayout;
     private GridView hotCity,hotScene;
     private List<String> cityList,sceneList,citySelected;
@@ -73,6 +73,7 @@ public class OrientationActivity extends AppCompatActivity implements EasyPermis
 
     private void initView(){
         btnSearch = (Button)findViewById(R.id.btn_search);
+        btnBack = (ImageButton)findViewById(R.id.ib_back);
         coordinatorLayout = (CoordinatorLayout)findViewById(R.id.orientation_content);
         hotCity = (GridView)findViewById(R.id.hot_city_grid);
         hotScene = (GridView)findViewById(R.id.hot_scene_grid);
@@ -81,6 +82,13 @@ public class OrientationActivity extends AppCompatActivity implements EasyPermis
 
         hotCity.setAdapter(cityAdpter);
         hotScene.setAdapter(sceneAdapter);
+
+        btnBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                goToMainActivity();
+            }
+        });
 
         btnSearch.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -142,21 +150,15 @@ public class OrientationActivity extends AppCompatActivity implements EasyPermis
 
     public void addNewCity(String name){
         if (citySelected.contains(name)){
-            AppController.getInstance().setCurCityIndex(citySelected.indexOf(name)+1);
+            AppController.getInstance().setCurCityIndex(citySelected.indexOf(name));
             goToMainActivity();
         }
         else{
-            DBOperation db  = new DBOperation(OrientationActivity.this);
-            int order = AppController.getInstance().getLatestOrder() + 1;
-            CityInfo cityInfo = null;
-            cityInfo = db.insertCitySelected(name,order);
-            if (cityInfo == null){
+            int result = AppController.getInstance().addCityInfoList(name);
+            if(result == -1){
                 showSnackBarMessage("请重试");
             }
-            else{
-                AppController.getInstance().appendCityInfoList(cityInfo);
-                AppController.getInstance().setCityListChanged(true);
-                AppController.getInstance().setCurCityIndex(order);
+            else if(result == 1){
                 goToMainActivity();
             }
         }
@@ -187,6 +189,7 @@ public class OrientationActivity extends AppCompatActivity implements EasyPermis
     public void goToMainActivity(){
         Intent intent = new Intent(OrientationActivity.this,MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_in_animation, R.anim.left_out_animation);
         OrientationActivity.this.finish();
     }
 

@@ -84,6 +84,7 @@ public class LoadActivity extends AppCompatActivity implements OnAnimationListen
     public void goToMainActivity(){
         Intent intent = new Intent(LoadActivity.this,MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_in_animation, R.anim.left_out_animation);
         LoadActivity.this.finish();
     }
 
@@ -92,6 +93,7 @@ public class LoadActivity extends AppCompatActivity implements OnAnimationListen
         //是否自动进行定位并添加位置
         intent.putExtra("isOrientation",true);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_in_animation, R.anim.left_out_animation);
         LoadActivity.this.finish();
     }
 

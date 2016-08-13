@@ -10,7 +10,7 @@
           android:pivotY="20%"
           android:fillAfter="false"
           android:startOffset="500"
-          android:duration="500" />
+          android:duration="1000" />
     <alpha 
         android:fromAlpha="0.1"
         android:toAlpha="1.0"
